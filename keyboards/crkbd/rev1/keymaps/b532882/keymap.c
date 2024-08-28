@@ -47,9 +47,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [1] = LAYOUT_split_3x6_3(
-    _______  , KC_NO  , KC_NO  , KC_NO        , KC_NO        , KC_NO   , KC_HOME   , C(S(KC_TAB))  , C(KC_TAB)      , KC_NO   , KC_NO  , _______   ,
-    _______  , KC_NO  , KC_NO  , KC_LSFT      , KC_LCTL      , CW_TOGG , KC_LEFT   , KC_DOWN       , KC_UP          , KC_RGHT , KC_NO  , _______   ,
-    _______  , KC_NO  , KC_NO  , KC_NO        , KC_NO        , KC_NO   , KC_END    , G(A(KC_LEFT)) , G(A(KC_RIGHT)) , KC_NO   , KC_NO  , _______   ,
+    _______  , KC_NO  , KC_NO  , KC_NO        , KC_NO        , KC_NO   , KC_HOME   , C(S(KC_TAB))  , C(KC_TAB)      , KC_NO   , KC_PGUP  , _______   ,
+    _______  , KC_NO  , KC_NO  , KC_LSFT      , KC_LCTL      , CW_TOGG , KC_LEFT   , KC_DOWN       , KC_UP          , KC_RGHT , KC_NO    , _______   ,
+    _______  , KC_NO  , KC_NO  , KC_NO        , KC_NO        , KC_NO   , KC_END    , G(A(KC_LEFT)) , G(A(KC_RIGHT)) , KC_NO   , KC_PGDN  , _______   ,
                                  _______      , _______      , _______ , KC_NO     , LCTL(KC_INS)  , LSFT(KC_INS)
 ),
 
@@ -596,7 +596,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     uint8_t mod_state;
     static bool delkey_registered ,ctrlbrace_registered ,ctrlt_registered;
-    static bool j_registered, k_registered;
 
     if (record->event.pressed) {
         set_keylog(keycode, record);
@@ -664,44 +663,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (ctrlbrace_registered) {
                     unregister_code(KC_RBRC);
                     ctrlbrace_registered = false;
-                    return false;
-                }
-            }
-			break;
-            //ctrl + J 누르면 PAGE DOWN로 대응함.
-        case KC_J:
-            mod_state = get_mods();
-            if (record->event.pressed) {
-                if (mod_state & MOD_MASK_CTRL) {
-                    del_mods(MOD_MASK_CTRL);
-                    register_code(KC_PGDN);
-                    j_registered = true;
-                    set_mods(mod_state);
-                    return false;
-                }
-            } else {
-                if (j_registered) {
-                    unregister_code(KC_PGDN);
-                    j_registered = false;
-                    return false;
-                }
-            }
-			break;
-            //ctrl + K 누르면 PAGE UP으로 대응함.
-		case KC_K:
-			mod_state = get_mods();
-            if (record->event.pressed) {
-                if (mod_state & MOD_MASK_CTRL) {
-                    del_mods(MOD_MASK_CTRL);
-                    register_code(KC_PGUP);
-                    k_registered = true;
-                    set_mods(mod_state);
-                    return false;
-                }
-            } else {
-                if (k_registered) {
-                    unregister_code(KC_PGUP);
-                    k_registered = false;
                     return false;
                 }
             }

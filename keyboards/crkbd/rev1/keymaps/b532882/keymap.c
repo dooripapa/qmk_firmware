@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [1] = LAYOUT_split_3x6_3( //CW_TOGG
-    _______  , KC_NO  , KC_NO  , KC_NO        , KC_NO         , KC_NO   , KC_HOME   , C(S(KC_TAB))  , C(KC_TAB)      , KC_NO   , KC_PGUP  , _______   ,
+    _______  , KC_NO  , KC_NO  , C(S(KC_TAB)) , C(KC_TAB)     , KC_NO   , KC_HOME   , C(S(KC_PGUP)) , C(S(KC_PGDN))  , KC_NO   , KC_PGUP  , _______   ,
     _______  , KC_NO  , KC_NO  , KC_LSFT      , KC_LCTL       , KC_NO   , KC_LEFT   , KC_DOWN       , KC_UP          , KC_RGHT , KC_NO    , _______   ,
     _______  , KC_NO  , KC_NO  , G(C(KC_LEFT)), G(C(KC_RIGHT)), KC_NO   , KC_END    , G(A(KC_LEFT)) , G(A(KC_RIGHT)) , KC_NO   , KC_PGDN  , _______   ,
                                  _______      , _______       , _______ , KC_NO     , LCTL(KC_INS)  , LSFT(KC_INS)

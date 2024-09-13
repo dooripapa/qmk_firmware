@@ -47,10 +47,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [1] = LAYOUT_split_3x6_3( //CW_TOGG
-    _______  , KC_NO  , KC_NO  , KC_NO        , KC_NO        , KC_NO   , KC_HOME   , C(S(KC_TAB))  , C(KC_TAB)      , KC_NO   , KC_PGUP  , _______   ,
-    _______  , KC_NO  , KC_NO  , KC_LSFT      , KC_LCTL      , KC_NO   , KC_LEFT   , KC_DOWN       , KC_UP          , KC_RGHT , KC_NO    , _______   ,
-    _______  , KC_NO  , KC_NO  , KC_NO        , KC_NO        , KC_NO   , KC_END    , G(A(KC_LEFT)) , G(A(KC_RIGHT)) , KC_NO   , KC_PGDN  , _______   ,
-                                 _______      , _______      , _______ , KC_NO     , LCTL(KC_INS)  , LSFT(KC_INS)
+    _______  , KC_NO  , KC_NO  , KC_NO        , KC_NO         , KC_NO   , KC_HOME   , C(S(KC_TAB))  , C(KC_TAB)      , KC_NO   , KC_PGUP  , _______   ,
+    _______  , KC_NO  , KC_NO  , KC_LSFT      , KC_LCTL       , KC_NO   , KC_LEFT   , KC_DOWN       , KC_UP          , KC_RGHT , KC_NO    , _______   ,
+    _______  , KC_NO  , KC_NO  , G(C(KC_LEFT)), G(C(KC_RIGHT)), KC_NO   , KC_END    , G(A(KC_LEFT)) , G(A(KC_RIGHT)) , KC_NO   , KC_PGDN  , _______   ,
+                                 _______      , _______       , _______ , KC_NO     , LCTL(KC_INS)  , LSFT(KC_INS)
 ),
 
 [2] = LAYOUT_split_3x6_3(
@@ -203,7 +203,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             break;
         case PASSWRD2:
             if (pressed) {
-                SEND_STRING("Rlqksdbdnjf6!");
+                SEND_STRING("Rlqksvkfdnjf8!");
             }
             break;
         case PASSWRD3:

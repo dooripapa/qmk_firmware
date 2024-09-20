@@ -105,37 +105,35 @@ enum combs {
     CBR,  // { }
     BRC,  // [ ]
     CWT,
-    NEQ,
+	LEADER,
     PASSWRD1,
     PASSWRD2,
     PASSWRD3,
     GAME
 };
 
-const uint16_t PROGMEM esc_combo     [] = {KC_J   , KC_K    , COMBO_END};
-const uint16_t PROGMEM prn_combo     [] = {KC_E   , KC_R    , COMBO_END}; // ( )
-const uint16_t PROGMEM cbr_combo     [] = {KC_D   , LT(5,KC_F)    , COMBO_END}; // { }
-const uint16_t PROGMEM brc_combo     [] = {KC_C   , KC_V    , COMBO_END}; // [ ]
-const uint16_t PROGMEM cw_togg_combo [] = {KC_U   , KC_I    , COMBO_END}; // ==
-const uint16_t PROGMEM neq_combo     [] = {KC_M   , KC_COMM , COMBO_END}; // !=
-const uint16_t PROGMEM pass1_combo   [] = {KC_W   , KC_E    , COMBO_END}; //
-const uint16_t PROGMEM pass2_combo   [] = {KC_S   , KC_D    , COMBO_END}; //
-const uint16_t PROGMEM pass3_combo   [] = {KC_X   , KC_C    , COMBO_END}; //
-const uint16_t PROGMEM game_combo    [] = {KC_TAB , KC_BSPC , COMBO_END}; // game layout
+const uint16_t PROGMEM esc_combo     [] = {KC_J   , KC_K       , COMBO_END};
+const uint16_t PROGMEM prn_combo     [] = {KC_E   , KC_R       , COMBO_END}; // ( )
+const uint16_t PROGMEM cbr_combo     [] = {KC_D   , LT(5,KC_F) , COMBO_END}; // { }
+const uint16_t PROGMEM brc_combo     [] = {KC_C   , KC_V       , COMBO_END}; // [ ]
+const uint16_t PROGMEM cw_togg_combo [] = {KC_U   , KC_I       , COMBO_END}; // ==
+const uint16_t PROGMEM leader_combo  [] = {KC_M   , KC_COMM    , COMBO_END}; // ==
+const uint16_t PROGMEM pass1_combo   [] = {KC_W   , KC_E       , COMBO_END}; //
+const uint16_t PROGMEM pass2_combo   [] = {KC_S   , KC_D       , COMBO_END}; //
+const uint16_t PROGMEM pass3_combo   [] = {KC_X   , KC_C       , COMBO_END}; //
+const uint16_t PROGMEM game_combo    [] = {KC_TAB , KC_BSPC    , COMBO_END}; // game layout
 
 /*
 COMBO( big_combo , CW_TOGG ),
 COMBO_ACTION( esc_combo      ),
 */
 combo_t key_combos[COMBO_COUNT] = {
-//    [BIG]        = COMBO(big_combo , CW_TOGG ),
     [ESC]        = COMBO_ACTION( esc_combo      ),
     [PRN]        = COMBO_ACTION( prn_combo      ),
     [CBR]        = COMBO_ACTION( cbr_combo      ),
     [BRC]        = COMBO_ACTION( brc_combo      ),
-//    [CWT]        = COMBO_ACTION( cw_togg_combo  ),
-    [CWT]        = COMBO(cw_togg_combo , CW_TOGG ),
-    [NEQ]        = COMBO_ACTION( neq_combo      ),
+    [CWT]        = COMBO(cw_togg_combo , CW_TOGG),
+    [LEADER]     = COMBO(leader_combo  , QK_LEAD),
     [PASSWRD1]   = COMBO_ACTION( pass1_combo    ),
     [PASSWRD2]   = COMBO_ACTION( pass2_combo    ),
     [PASSWRD3]   = COMBO_ACTION( pass3_combo    ),
@@ -149,7 +147,7 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
         case CBR:  // { }
         case BRC:  // [ ]
         case CWT:
-        case NEQ:
+        case LEADER:
         case PASSWRD1:
         case PASSWRD2:
         case PASSWRD3:
@@ -188,12 +186,6 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             if (pressed) {
                 tap_code16(KC_LBRC);
                 tap_code16(KC_RBRC);
-            }
-            break;
-        case NEQ:
-            if (pressed) {
-                tap_code16(S(KC_1));
-                tap_code16(KC_EQL);
             }
             break;
         case PASSWRD1:

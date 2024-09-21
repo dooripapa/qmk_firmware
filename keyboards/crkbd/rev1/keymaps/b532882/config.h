@@ -25,8 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Select hand configuration */
 #define COMBO_SHOULD_TRIGGER
-#define COMBO_COUNT 11
-#define COMBO_TERM 35
+#define COMBO_COUNT 13
+#define COMBO_TERM 20
 
 /* shift feature */
 //#define AUTO_SHIFT_TIMEOUT_PER_KEY
@@ -46,6 +46,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RETRO_TAPPING_PER_KEY
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 #define QUICK_TAP_TERM_PER_KEY
+#define PERMISSIVE_HOLD_PER_KEY
 
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_EFFECT_BREATHING

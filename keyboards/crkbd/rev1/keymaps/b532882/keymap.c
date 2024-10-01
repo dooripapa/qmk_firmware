@@ -41,13 +41,13 @@ tap_dance_action_t tap_dance_actions[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_split_3x6_3(
     KC_TAB   , KC_Q      , KC_W   , KC_E    , KC_R       , KC_T         , KC_Y         , KC_U    , KC_I     , KC_O     , KC_P    , KC_BSPC      ,
-    KC_LCTL  , LT(6,KC_A), KC_S   , KC_D    , LT(5,KC_F) , KC_G         , KC_H         , KC_J    , KC_K     , KC_L     , KC_SCLN , LT(0,KC_ENT) ,
+    KC_LCTL  , KC_A      , KC_S   , KC_D    , KC_F       , KC_G         , KC_H         , KC_J    , KC_K     , KC_L     , KC_SCLN , KC_ENT       ,
     KC_LSFT  , KC_Z      , KC_X   , KC_C    , KC_V       , KC_B         , KC_N         , KC_M    , KC_COMM  , KC_DOT   , KC_SLSH , KC_RSFT      ,
-                                    KC_LGUI , KC_LALT    , LT(1,KC_SPC) , LT(2,KC_SPC) , KC_RALT , MO(3)
+                                    KC_LGUI , KC_LALT    , MO(1)        , LT(2,KC_SPC) , KC_RALT , MO(3)
 ),
 
 [1] = LAYOUT_split_3x6_3( //CW_TOGG
-    _______  , KC_NO  , KC_NO  , C(S(KC_TAB)) , C(KC_TAB)     , KC_NO   , KC_HOME   , C(S(KC_PGUP)) , C(S(KC_PGDN))  , KC_NO   , KC_PGUP  , _______   ,
+    _______  , KC_NO  , KC_NO  , C(S(KC_TAB)) , C(KC_TAB)     , KC_NO   , KC_HOME   , C(KC_PGUP)    , C(KC_PGDN)     , KC_NO   , KC_PGUP  , _______   ,
     _______  , KC_NO  , KC_NO  , KC_LSFT      , KC_LCTL       , KC_NO   , KC_LEFT   , KC_DOWN       , KC_UP          , KC_RGHT , KC_NO    , _______   ,
     _______  , KC_NO  , KC_NO  , G(C(KC_LEFT)), G(C(KC_RIGHT)), KC_NO   , KC_END    , G(A(KC_LEFT)) , G(A(KC_RIGHT)) , KC_NO   , KC_PGDN  , _______   ,
                                  _______      , _______       , _______ , KC_NO     , LCTL(KC_INS)  , LSFT(KC_INS)
@@ -55,22 +55,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [2] = LAYOUT_split_3x6_3(
     _______ , S(KC_1)   , S(KC_2)  , S(KC_3)   , S(KC_4)   , S(KC_5)    , S(KC_6)    , S(KC_7)    , S(KC_8)    , S(KC_9)  , S(KC_0)    , _______ ,
-    _______ , KC_GRV    , S(KC_GRV), KC_NO     , TD(TD_CBR), S(KC_BSLS) , KC_EQL     , KC_MINS    , S(KC_QUOT) , KC_QUOT  , S(KC_SCLN) , _______ ,
-    _______ , KC_NO     , KC_NO    , KC_NO     , TD(TD_BRC), KC_BSLS    , S(KC_EQL)  , S(KC_MINS) , S(KC_COMM) , S(KC_DOT), S(KC_SLSH) , _______ ,
+    _______ , KC_GRV    , S(KC_GRV), KC_LCBR   , KC_RCBR   , S(KC_BSLS) , KC_EQL     , KC_MINS    , S(KC_QUOT) , KC_QUOT  , S(KC_SCLN) , _______ ,
+    _______ , KC_NO     , KC_NO    , KC_LBRC   , KC_RBRC   , KC_BSLS    , S(KC_EQL)  , S(KC_MINS) , S(KC_COMM) , S(KC_DOT), S(KC_SLSH) , _______ ,
                                      _______   , _______   , _______    , _______    , _______    , _______
 ),
 
 
 [3] = LAYOUT_split_3x6_3(
-		                        //change signature
-								             //rename
-											           //run           //debug
-    _______ , KC_NO   , KC_NO   , C(KC_F6) , S(KC_F6), C(S(KC_F10))  , S(KC_F9)  , KC_NO     , A(KC_INS), KC_NO   , KC_NO   , _______ ,
-	                    //stop                                                                 //generate
-    _______ , KC_NO   , C(KC_F2), KC_NO    , KC_NO   , KC_NO         , KC_NO     , KC_NO     , KC_NO    , KC_NO   , KC_NO   , _______ ,
-	                                                   //debug spot    //inline    //extract function
-    _______ , KC_NO   , KC_NO   , KC_NO    , KC_NO   , C(KC_F8)      , C(A(KC_N)), C(A(KC_M)), KC_NO    , KC_NO   , KC_NO   , _______ ,
-                                 _______   , _______ , KC_SPC        , KC_SPC    , KC_NO     , _______
+		                        //change signature //rename //run           //debug
+    _______ , KC_NO   , KC_NO   , C(KC_F6)         , S(KC_F6), C(S(KC_F10))  , S(KC_F9)  , KC_NO     , A(KC_INS), KC_NO   , KC_NO   , _______ ,
+	                    //stop                                                                         //generate
+    _______ , KC_NO   , C(KC_F2), KC_NO            , KC_NO   , KC_NO         , KC_NO     , KC_NO     , KC_NO    , KC_NO   , KC_NO   , _______ ,
+	                                                           //debug spot    //inline    //extract function
+    _______ , KC_NO   , KC_NO   , KC_NO            , KC_NO   , C(KC_F8)      , C(A(KC_N)), C(A(KC_M)), KC_NO    , KC_NO   , KC_NO   , _______ ,
+                                 _______           , _______ , KC_SPC        , KC_SPC    , KC_NO     , _______
 ),                                                           
 /*Game layout*/
 [4] = LAYOUT_split_3x6_3(
@@ -82,16 +80,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [5] = LAYOUT_split_3x6_3(
     _______  , KC_NO      , KC_NO      , KC_NO      , KC_NO     , KC_NO        , KC_NO        , KC_7      , KC_8      , KC_9   , KC_0       , _______ ,
-    _______  , KC_NO      , KC_NO      , KC_NO      , KC_NO     , KC_NO        , KC_DOT       , KC_4      , KC_5      , KC_6   , KC_NO      , C(S(KC_ENT)) ,
+    _______  , KC_NO      , KC_NO      , KC_NO      , KC_NO     , KC_NO        , KC_DOT       , KC_4      , KC_5      , KC_6   , KC_NO      , _______ ,
     _______  , KC_NO      , KC_NO      , KC_NO      , KC_NO     , KC_NO        , KC_COMM      , KC_1      , KC_2      , KC_3   , KC_SLSH    , _______ ,
-                                           _______  , _______   , LT(1,KC_SPC) , LT(2,KC_SPC) , _______   , _______
+                                           _______  , _______   , MO(1)        , LT(2,KC_SPC) , _______   , _______
 ),
 
 [6] = LAYOUT_split_3x6_3(
-    _______  , KC_NO     , KC_NO  , KC_NO   , KC_NO    , KC_NO    , KC_NO    , KC_F7    , KC_F8    , KC_F9  , KC_F10   , _______ ,
-    _______  , KC_NO     , KC_NO  , KC_NO   , KC_NO    , KC_NO    , KC_NO    , KC_F4    , KC_F5    , KC_F6  , KC_F11   , _______ ,
-    _______  , KC_NO     , KC_NO  , KC_NO   , KC_NO    , KC_NO    , KC_NO    , KC_F1    , KC_F2    , KC_F3  , KC_F12   , _______ ,
-                                    _______ , _______  , KC_SPC   , KC_SPC   , _______ , _______
+    _______  , KC_NO     , KC_NO  , KC_NO   , KC_NO    , KC_NO    , KC_NO          , KC_F7    , KC_F8    , KC_F9  , KC_F10   , _______ ,
+    _______  , KC_NO     , KC_NO  , KC_NO   , KC_NO    , KC_NO    , KC_NO          , KC_F4    , KC_F5    , KC_F6  , KC_F11   , _______ ,
+    _______  , KC_NO     , KC_NO  , KC_NO   , KC_NO    , KC_NO    , KC_NO          , KC_F1    , KC_F2    , KC_F3  , KC_F12   , _______ ,
+                                    _______ , _______  , MO(1)    , LT(2,KC_SPC)   , _______ , _______
 ),
 
 };
@@ -114,7 +112,7 @@ enum combs {
 
 const uint16_t PROGMEM esc_combo     [] = {KC_J   , KC_K       , COMBO_END};
 const uint16_t PROGMEM prn_combo     [] = {KC_E   , KC_R       , COMBO_END}; // ( )
-const uint16_t PROGMEM cbr_combo     [] = {KC_D   , LT(5,KC_F) , COMBO_END}; // { }
+const uint16_t PROGMEM cbr_combo     [] = {KC_D   , KC_F       , COMBO_END}; // { }
 const uint16_t PROGMEM brc_combo     [] = {KC_C   , KC_V       , COMBO_END}; // [ ]
 const uint16_t PROGMEM cw_togg_combo [] = {KC_U   , KC_I       , COMBO_END}; // ==
 const uint16_t PROGMEM leader_combo  [] = {KC_M   , KC_COMM    , COMBO_END}; // ==
@@ -130,8 +128,8 @@ COMBO_ACTION( esc_combo      ),
 combo_t key_combos[COMBO_COUNT] = {
     [ESC]        = COMBO_ACTION( esc_combo      ),
     [PRN]        = COMBO_ACTION( prn_combo      ),
-    [CBR]        = COMBO_ACTION( cbr_combo      ),
-    [BRC]        = COMBO_ACTION( brc_combo      ),
+    [CBR]        = COMBO( cbr_combo    , MO(5)  ),
+    [BRC]        = COMBO( brc_combo    , MO(6)  ),
     [CWT]        = COMBO(cw_togg_combo , CW_TOGG),
     [LEADER]     = COMBO(leader_combo  , QK_LEAD),
     [PASSWRD1]   = COMBO_ACTION( pass1_combo    ),

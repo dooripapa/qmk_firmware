@@ -504,6 +504,7 @@ bool oled_task_user(void) {
     }
     return false;
 }
+#endif // OLED_ENGAME
 
 /*Rolling key*/
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
@@ -534,13 +535,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case TD(TD_CBR):
         case TD(TD_BRC):
             return 200;
-		case LT(0,KC_ENT):
-            return 200;
         case LT(2,KC_SPC):
             return 150;
-		case LT(6,KC_A):
-		case LT(5,KC_F):
-            return 230;
         default:
             return 180;
     }
@@ -566,9 +562,6 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
  */
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-		case LT(6,KC_A):
-		case LT(5,KC_F):
-        case LT(1,KC_SPC):
         case LT(2,KC_SPC):
             return true;
         default:
@@ -652,15 +645,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
 			break;
+		/*
 		case LT(0, KC_ENT):
 			if (!record->tap.count && record->event.pressed) {
                 tap_code16( C(S(KC_ENT)) ); // Intercept hold function to send Ctrl-X
                 return false;
             }
 			break;
+		*/
         default:
             break;
     }
     return true;
 }
-#endif // OLED_ENGAME

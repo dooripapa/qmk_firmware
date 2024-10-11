@@ -41,7 +41,7 @@ tap_dance_action_t tap_dance_actions[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_split_3x6_3(
     KC_TAB   , KC_Q      , KC_W   , KC_E    , KC_R       , KC_T         , KC_Y         , KC_U    , KC_I     , KC_O     , KC_P    , KC_BSPC      ,
-    KC_LCTL  , KC_A      , KC_S   , KC_D    , KC_F       , KC_G         , KC_H         , KC_J    , KC_K     , KC_L     , KC_SCLN , KC_ENT       ,
+    KC_LCTL  , LT(6,KC_A), KC_S   , KC_D    , LT(5,KC_F) , KC_G         , KC_H         , KC_J    , KC_K     , KC_L     , KC_SCLN , KC_ENT       ,
     KC_LSFT  , KC_Z      , KC_X   , KC_C    , KC_V       , KC_B         , KC_N         , KC_M    , KC_COMM  , KC_DOT   , KC_SLSH , KC_RSFT      ,
                                     KC_LGUI , KC_LALT    , MO(1)        , LT(2,KC_SPC) , KC_RALT , MO(3)
 ),
@@ -112,7 +112,7 @@ enum combs {
 
 const uint16_t PROGMEM esc_combo     [] = {KC_J   , KC_K       , COMBO_END};
 const uint16_t PROGMEM prn_combo     [] = {KC_E   , KC_R       , COMBO_END}; // ( )
-const uint16_t PROGMEM cbr_combo     [] = {KC_D   , KC_F       , COMBO_END}; // { }
+const uint16_t PROGMEM cbr_combo     [] = {KC_D   , LT(5,KC_F) , COMBO_END}; // { }
 const uint16_t PROGMEM brc_combo     [] = {KC_C   , KC_V       , COMBO_END}; // [ ]
 const uint16_t PROGMEM cw_togg_combo [] = {KC_U   , KC_I       , COMBO_END}; // ==
 const uint16_t PROGMEM leader_combo  [] = {KC_M   , KC_COMM    , COMBO_END}; // ==
@@ -128,8 +128,8 @@ COMBO_ACTION( esc_combo      ),
 combo_t key_combos[COMBO_COUNT] = {
     [ESC]        = COMBO_ACTION( esc_combo      ),
     [PRN]        = COMBO_ACTION( prn_combo      ),
-    [CBR]        = COMBO( cbr_combo    , MO(5)  ),
-    [BRC]        = COMBO( brc_combo    , MO(6)  ),
+    [CBR]        = COMBO_ACTION( cbr_combo      ),
+    [BRC]        = COMBO_ACTION( brc_combo      ),
     [CWT]        = COMBO(cw_togg_combo , CW_TOGG),
     [LEADER]     = COMBO(leader_combo  , QK_LEAD),
     [PASSWRD1]   = COMBO_ACTION( pass1_combo    ),
@@ -537,6 +537,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return 200;
         case LT(2,KC_SPC):
             return 150;
+	case LT(6,KC_A):
+	case LT(5,KC_F):
+            return 230;
         default:
             return 180;
     }
@@ -562,6 +565,8 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
  */
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+	case LT(6,KC_A):
+	case LT(5,KC_F):
         case LT(2,KC_SPC):
             return true;
         default:
@@ -645,14 +650,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
 			break;
-		/*
+	/*
 		case LT(0, KC_ENT):
 			if (!record->tap.count && record->event.pressed) {
                 tap_code16( C(S(KC_ENT)) ); // Intercept hold function to send Ctrl-X
                 return false;
             }
 			break;
-		*/
+	*/
         default:
             break;
     }

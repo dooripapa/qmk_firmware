@@ -41,7 +41,7 @@ tap_dance_action_t tap_dance_actions[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_split_3x6_3(
     KC_TAB   , KC_Q      , KC_W   , KC_E    , KC_R       , KC_T         , KC_Y         , KC_U    , KC_I     , KC_O     , KC_P    , KC_BSPC      ,
-    KC_LCTL  , LT(6,KC_A), KC_S   , KC_D    , LT(5,KC_F) , KC_G         , KC_H         , KC_J    , KC_K     , KC_L     , KC_SCLN , KC_ENT       ,
+    KC_LCTL  , LT(6,KC_A), KC_S   , KC_D    , LT(5,KC_F) , LSFT_T(KC_G) , RSFT_T(KC_H) , KC_J    , KC_K     , KC_L     , KC_SCLN , KC_ENT       ,
     KC_LSFT  , KC_Z      , KC_X   , KC_C    , KC_V       , KC_B         , KC_N         , KC_M    , KC_COMM  , KC_DOT   , KC_SLSH , KC_RSFT      ,
                                     KC_LGUI , KC_LALT    , MO(1)        , LT(2,KC_SPC) , KC_RALT , MO(3)
 ),
@@ -537,8 +537,10 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return 200;
         case LT(2,KC_SPC):
             return 150;
-	case LT(6,KC_A):
-	case LT(5,KC_F):
+		case LT(6,KC_A):
+		case LT(5,KC_F):
+		case LSFT_T(KC_G):
+		case RSFT_T(KC_H):
             return 230;
         default:
             return 180;
@@ -552,6 +554,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(2,KC_SPC):
+		case LSFT_T(KC_G):
+		case RSFT_T(KC_H):
             return 150;
         default:
             return 180;
@@ -565,12 +569,14 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
  */
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-	case LT(6,KC_A):
-	case LT(5,KC_F):
-        case LT(2,KC_SPC):
-            return true;
-        default:
-            return false;
+		case LT(6,KC_A):
+		case LT(5,KC_F):
+		case LT(2,KC_SPC):
+		case LSFT_T(KC_G):
+		case RSFT_T(KC_H):
+			return true;
+		default:
+			return false;
     }
 }
 

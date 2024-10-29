@@ -40,10 +40,10 @@ tap_dance_action_t tap_dance_actions[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_split_3x6_3(
-    KC_TAB   , KC_Q      , KC_W        , KC_E         , KC_R        , KC_T         , KC_Y         , KC_U        , KC_I        , KC_O         , KC_P    , KC_BSPC      ,
-    KC_ESC   , KC_A      , LALT_T(KC_S), LSFT_T(KC_D) , LCTL_T(KC_F), KC_G         , KC_H         , LCTL_T(KC_J), LSFT_T(KC_K), LALT_T(KC_L) , KC_SCLN , KC_ENT       ,
-    MO(5)    , KC_Z      , KC_X        , KC_C         , KC_V        , KC_B         , KC_N         , KC_M        , KC_COMM     , KC_DOT       , KC_SLSH , MO(5)        ,
-                                         KC_LGUI      , KC_LALT     , MO(1)        , LT(2,KC_SPC) , KC_RALT     , MO(3)
+    KC_TAB          , KC_Q      , KC_W        , KC_E         , KC_R        , KC_T         , KC_Y         , KC_U        , KC_I        , KC_O         , KC_P    , KC_BSPC      ,
+    LCTL_T(KC_ESC)  , LT(6,KC_A), KC_S        , KC_D         , LT(5,KC_F)  , KC_G         , KC_H         , KC_J        , KC_K        , KC_L         , KC_SCLN , KC_ENT       ,
+    KC_LSFT         , KC_Z      , KC_X        , KC_C         , KC_V        , KC_B         , KC_N         , KC_M        , KC_COMM     , KC_DOT       , KC_SLSH , KC_RSFT      ,
+                                                KC_LGUI      , KC_LALT     , MO(1)        , LT(2,KC_SPC) , KC_RALT     , MO(3)
 ),
 [1] = LAYOUT_split_3x6_3( //CW_TOGG
     _______  , KC_NO  , KC_NO  , C(S(KC_TAB)) , C(KC_TAB)     , KC_NO   , KC_HOME   , C(KC_PGUP)    , C(KC_PGDN)     , KC_NO   , KC_PGUP  , _______   ,
@@ -75,8 +75,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 [5] = LAYOUT_split_3x6_3(
     _______  , KC_F1    , KC_F2  , KC_F3    , KC_F4    , KC_F5     , KC_NO     , KC_7         , KC_8      , KC_9      , KC_0    , _______ ,
-    _______  , KC_F6    , KC_F7  , KC_F8    , KC_F9    , KC_F10    , KC_DOT    , KC_4         , KC_5      , KC_6      , KC_NO   , _______ ,
+    _______  , KC_F6    , KC_F7  , KC_F8    , _______  , KC_F10    , KC_DOT    , KC_4         , KC_5      , KC_6      , KC_NO   , _______ ,
     _______  , KC_NO    , KC_NO  , KC_NO    , KC_F11   , KC_F12    , KC_COMM   , KC_1         , KC_2      , KC_3      , KC_SLSH , _______ ,
+                                              _______  , _______   , MO(1)     , LT(2,KC_SPC) , _______   , _______
+),
+[6] = LAYOUT_split_3x6_3(
+    _______  , KC_NO    , KC_NO  , KC_NO    , KC_NO    , KC_NO     , KC_NO     , KC_F7        , KC_F8     , KC_F9      , KC_F10 , _______ ,
+    _______  , _______  , KC_NO  , KC_NO    , KC_NO    , KC_NO     , KC_NO     , KC_F4        , KC_F5     , KC_F6      , KC_F11 , _______ ,
+    _______  , KC_NO    , KC_NO  , KC_NO    , KC_NO    , KC_NO     , KC_NO     , KC_F1        , KC_F2     , KC_F3      , KC_F12 , _______ ,
                                               _______  , _______   , MO(1)     , LT(2,KC_SPC) , _______   , _______
 )
 
@@ -100,7 +106,7 @@ enum combs {
 
 const uint16_t PROGMEM esc_combo     [] = {KC_J   , KC_K       , COMBO_END};
 const uint16_t PROGMEM prn_combo     [] = {KC_E   , KC_R       , COMBO_END}; // ( )
-const uint16_t PROGMEM cbr_combo     [] = {LSFT_T(KC_D) , LCTL_T(KC_F) , COMBO_END}; // { }
+const uint16_t PROGMEM cbr_combo     [] = {KC_D   , LT(5,KC_F) , COMBO_END}; // { }
 const uint16_t PROGMEM brc_combo     [] = {KC_C   , KC_V       , COMBO_END}; // [ ]
 const uint16_t PROGMEM cw_togg_combo [] = {KC_U   , KC_I       , COMBO_END}; // ==
 const uint16_t PROGMEM leader_combo  [] = {KC_M   , KC_COMM    , COMBO_END}; // ==
@@ -128,7 +134,6 @@ combo_t key_combos[COMBO_COUNT] = {
 
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
     switch (combo_index) {
-        case ESC:
         case PRN:  // ( )
         case CBR:  // { }
         case BRC:  // [ ]
@@ -497,7 +502,6 @@ bool oled_task_user(void) {
 /*Rolling key*/
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        //case LT(2,KC_SPC):
             // Immediately select the hold action when another key is pressed.
             //return true;
         default:
@@ -522,12 +526,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case TD(TD_CBR):
         case TD(TD_BRC):
             return 200;
-		case LALT_T(KC_S):
-		case LSFT_T(KC_D): 
-		case LCTL_T(KC_F):
-		case RCTL_T(KC_J):
-		case RSFT_T(KC_K):
-		case RALT_T(KC_L):
         case LT(2,KC_SPC):
             return 150;
         default:
@@ -541,16 +539,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
  */
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-		case LALT_T(KC_S):
-		case LSFT_T(KC_D): 
-		case LCTL_T(KC_F):
-		case RCTL_T(KC_J):
-		case RSFT_T(KC_K):
-		case RALT_T(KC_L):
         case LT(2,KC_SPC):
-		case LSFT_T(KC_G):
-		case RSFT_T(KC_H):
-            return 150;
+            return 180;
         default:
             return 180;
     }
@@ -563,12 +553,8 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
  */
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-		case LALT_T(KC_S):
-		case LSFT_T(KC_D): 
-		case LCTL_T(KC_F):
-		case RCTL_T(KC_J):
-		case RSFT_T(KC_K):
-		case RALT_T(KC_L):
+		case LT(5,KC_F): 
+		case LT(6,KC_A): 
         case LT(2,KC_SPC):
             return true;
         default:

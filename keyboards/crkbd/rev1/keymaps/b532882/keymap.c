@@ -74,9 +74,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                    _______  , _______  , KC_SPC    , KC_SPC    , KC_RALT      , KC_ESC
 ),
 [5] = LAYOUT_split_3x6_3(
-    _______  , KC_F1    , KC_F2  , KC_F3    , KC_F4    , KC_F5     , KC_NO     , KC_7         , KC_8      , KC_9      , KC_0    , _______ ,
-    _______  , KC_F6    , KC_F7  , KC_F8    , _______  , KC_F10    , KC_DOT    , KC_4         , KC_5      , KC_6      , KC_NO   , _______ ,
-    _______  , KC_NO    , KC_NO  , KC_NO    , KC_F11   , KC_F12    , KC_COMM   , KC_1         , KC_2      , KC_3      , KC_SLSH , _______ ,
+    _______  , KC_NO    , KC_NO  , KC_NO    , KC_NO    , KC_NO     , KC_NO     , KC_7         , KC_8      , KC_9      , KC_0    , _______ ,
+    _______  , KC_NO    , KC_NO  , KC_NO    , _______  , KC_NO     , KC_DOT    , KC_4         , KC_5      , KC_6      , KC_NO   , _______ ,
+    _______  , KC_NO    , KC_NO  , KC_NO    , KC_NO    , KC_NO     , KC_COMM   , KC_1         , KC_2      , KC_3      , KC_SLSH , _______ ,
                                               _______  , _______   , MO(1)     , LT(2,KC_SPC) , _______   , _______
 ),
 [6] = LAYOUT_split_3x6_3(
@@ -92,10 +92,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #if 1
 
 enum combs {
-    ESC,
-    PRN,  // ( )
-    CBR,  // { }
-    BRC,  // [ ]
+    PRN,    // ( )
+    CBR,    // { }
+    BRC,    // [ ]
     CWT,
 	LEADER,
     PASSWRD1,
@@ -104,7 +103,6 @@ enum combs {
     GAME
 };
 
-const uint16_t PROGMEM esc_combo     [] = {KC_J   , KC_K       , COMBO_END};
 const uint16_t PROGMEM prn_combo     [] = {KC_E   , KC_R       , COMBO_END}; // ( )
 const uint16_t PROGMEM cbr_combo     [] = {KC_D   , LT(5,KC_F) , COMBO_END}; // { }
 const uint16_t PROGMEM brc_combo     [] = {KC_C   , KC_V       , COMBO_END}; // [ ]
@@ -120,7 +118,6 @@ COMBO( big_combo , CW_TOGG ),
 COMBO_ACTION( esc_combo      ),
 */
 combo_t key_combos[COMBO_COUNT] = {
-    [ESC]        = COMBO_ACTION( esc_combo      ),
     [PRN]        = COMBO_ACTION( prn_combo      ),
     [CBR]        = COMBO_ACTION( cbr_combo      ),
     [BRC]        = COMBO_ACTION( brc_combo      ),
@@ -156,11 +153,6 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 void process_combo_event(uint16_t combo_index, bool pressed) {
 
     switch(combo_index) {
-        case ESC:
-            if (pressed) {
-                tap_code16(KC_ESC);
-            }
-            break;
         case PRN:
             if (pressed) {
                 tap_code16(KC_LPRN);

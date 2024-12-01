@@ -178,7 +178,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             break;
         case PASSWRD2:
             if (pressed) {
-                SEND_STRING("Rlqksvkfdnjf8!");
+                SEND_STRING("Rlqkstldnjf10!");
             }
             break;
         case PASSWRD3:
@@ -494,6 +494,8 @@ bool oled_task_user(void) {
 /*Rolling key*/
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+		case LT(5,KC_F):
+		case LT(6,KC_A):
             // Immediately select the hold action when another key is pressed.
             //return true;
         default:
@@ -517,6 +519,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case TD(TD_CBR):
         case TD(TD_BRC):
+		case LT(5,KC_F):
+		case LT(6,KC_A):
             return 200;
         case LT(2,KC_SPC):
             return 150;

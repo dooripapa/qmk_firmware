@@ -40,15 +40,15 @@ tap_dance_action_t tap_dance_actions[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_split_3x6_3(
-    KC_TAB          , KC_Q      , KC_W        , KC_E         , KC_R        , KC_T         , KC_Y         , KC_U        , KC_I        , KC_O         , KC_P    , KC_BSPC      ,
-    LCTL_T(KC_ESC)  , LT(6,KC_A), KC_S        , KC_D         , LT(5,KC_F)  , KC_G         , KC_H         , KC_J        , KC_K        , KC_L         , KC_SCLN , KC_ENT       ,
-    KC_LSFT         , KC_Z      , KC_X        , KC_C         , KC_V        , KC_B         , KC_N         , KC_M        , KC_COMM     , KC_DOT       , KC_SLSH , KC_RSFT      ,
+    KC_TAB          , KC_Q      , KC_W        , KC_E         , KC_R        , KC_T         , KC_Y         , KC_U        , KC_I        , KC_O         , KC_P    , KC_BSPC ,
+    LCTL_T(KC_ESC)  , LT(6,KC_A), KC_S        , KC_D         , LT(5,KC_F)  , KC_G         , KC_H         , KC_J        , KC_K        , KC_L         , KC_SCLN , KC_ENT  ,
+    KC_LSFT         , KC_Z      , KC_X        , KC_C         , KC_V        , KC_B         , KC_N         , KC_M        , KC_COMM     , KC_DOT       , KC_SLSH , KC_RSFT ,
                                                 KC_LGUI      , KC_LALT     , MO(1)        , LT(2,KC_SPC) , KC_RALT     , MO(3)
 ),
 [1] = LAYOUT_split_3x6_3( //CW_TOGG
-    _______  , KC_NO  , KC_NO  , C(S(KC_TAB)) , C(KC_TAB)     , KC_NO   , KC_HOME   , C(KC_PGUP)    , C(KC_PGDN)     , KC_NO   , KC_PGUP  , _______   ,
-    _______  , KC_NO  , KC_NO  , KC_LSFT      , KC_LCTL       , KC_NO   , KC_LEFT   , KC_DOWN       , KC_UP          , KC_RGHT , KC_NO    , _______   ,
-    _______  , KC_NO  , KC_NO  , G(C(KC_LEFT)), G(C(KC_RIGHT)), KC_NO   , KC_END    , G(A(KC_LEFT)) , G(A(KC_RIGHT)) , KC_NO   , KC_PGDN  , _______   ,
+    _______  , KC_NO  , KC_NO  , C(S(KC_TAB)) , C(KC_TAB)     , KC_NO   , KC_HOME   , C(KC_PGUP)    , C(KC_PGDN)     , KC_NO   , KC_PGUP  , _______      ,
+    _______  , KC_NO  , KC_NO  , KC_LSFT      , KC_LCTL       , KC_NO   , KC_LEFT   , KC_DOWN       , KC_UP          , KC_RGHT , KC_NO    , C(S(KC_ENT)) ,
+    _______  , KC_NO  , KC_NO  , G(C(KC_LEFT)), G(C(KC_RIGHT)), KC_NO   , KC_END    , G(A(KC_LEFT)) , G(A(KC_RIGHT)) , KC_NO   , KC_PGDN  , _______      ,
                                  _______      , _______       , _______ , KC_NO     , LCTL(KC_INS)  , LSFT(KC_INS)
 ),
 [2] = LAYOUT_split_3x6_3(

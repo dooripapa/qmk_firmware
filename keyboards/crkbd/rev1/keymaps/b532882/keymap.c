@@ -18,18 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
+#if 0
 enum {
     TD_CBR,
     TD_BRC
 };
-
-void line_selected(tap_dance_state_t *state, void *user_data) {
-    if (state->count >= 2) {
-        tap_code16(KC_HOME);
-        tap_code16(S(KC_END));
-        reset_tap_dance(state);
-    }
-}
 
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
@@ -37,6 +30,7 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_CBR]  = ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_RCBR),
     [TD_BRC]  = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
 };
+#endif
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_split_3x6_3(
@@ -58,13 +52,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                      _______   , _______   , _______    , _______    , _______    , _______
 ),
 [3] = LAYOUT_split_3x6_3(
-		                        //change signature //rename //run           //debug
-    _______ , KC_NO   , KC_NO   , C(KC_F6)         , S(KC_F6), C(S(KC_F10))  , S(KC_F9)  , KC_NO     , A(KC_INS), KC_NO   , KC_NO   , _______ ,
-	                    //stop                                                                         //generate
-    _______ , KC_NO   , C(KC_F2), KC_NO            , KC_NO   , KC_NO         , KC_NO     , KC_NO     , KC_NO    , KC_NO   , KC_NO   , _______ ,
+                        //change signature //rename //run            //debug   //unit test for current cursor position.
+                        //stop                                                             //generate
+    _______ , KC_NO   , KC_NO   , C(KC_F6)         , S(KC_F6), C(S(KC_F10))  , S(KC_F9)  , C(S(KC_F10)), A(KC_INS), KC_NO   , KC_NO   , _______ ,
+    _______ , KC_NO   , C(KC_F2), KC_NO            , KC_NO   , KC_NO         , KC_NO     , KC_NO       , KC_NO    , KC_NO   , KC_NO   , _______ ,
 	                                                           //debug spot    //inline    //extract function
-    _______ , KC_NO   , KC_NO   , KC_NO            , KC_NO   , C(KC_F8)      , C(A(KC_N)), C(A(KC_M)), KC_NO    , KC_NO   , KC_NO   , _______ ,
-                                 _______           , _______ , KC_SPC        , KC_SPC    , KC_NO     , _______
+    _______ , KC_NO   , KC_NO   , KC_NO            , KC_NO   , C(KC_F8)      , C(A(KC_N)), C(A(KC_M))  , KC_NO    , KC_NO   , KC_NO   , _______ ,
+                                 _______           , _______ , KC_SPC        , KC_SPC    , KC_NO       , _______
 ),                                                           
 /*Game layout*/
 [4] = LAYOUT_split_3x6_3(
@@ -272,7 +266,7 @@ static bool process_tap_or_long_press_key(
 /////////////////////////////////////////////////////////////////////////////////
 //  shfit feature
 /////////////////////////////////////////////////////////////////////////////////
-#if 1
+#if 0
 uint16_t get_autoshift_timeout(uint16_t keycode, keyrecord_t *record) {
 	int timeout=0;
     switch(keycode) {
@@ -345,6 +339,7 @@ void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record)
 /////////////////////////////////////////////////////////////////////////////////
 //  leader key
 /////////////////////////////////////////////////////////////////////////////////
+#if 0
 void leader_start_user(void) {
     // Do something when the leader key is pressed
 }
@@ -391,6 +386,7 @@ void leader_end_user(void) {
         tap_code16( C(KC_F2) );
     }
 }
+#endif
 /////////////////////////////////////////////////////////////////////////////////
 //  leader key end
 /////////////////////////////////////////////////////////////////////////////////
@@ -496,6 +492,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
 		case LT(5,KC_F):
 		case LT(6,KC_A):
+		case LCTL_T(KC_ESC):
             // Immediately select the hold action when another key is pressed.
             //return true;
         default:
@@ -507,6 +504,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(2,KC_SPC):
+		case LCTL_T(KC_ESC):
             // Immediately select the hold action when another key is tapped.
             return true;
         default:
@@ -517,8 +515,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case TD(TD_CBR):
-        case TD(TD_BRC):
 		case LT(5,KC_F):
 		case LT(6,KC_A):
             return 200;
@@ -552,6 +548,7 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
 		case LT(5,KC_F): 
 		case LT(6,KC_A): 
         case LT(2,KC_SPC):
+		case LCTL_T(KC_ESC):
             return true;
         default:
             return false;

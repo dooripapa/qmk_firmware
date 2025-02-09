@@ -505,6 +505,8 @@ bool oled_task_user(void) {
  */
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+		case LCTL_T(KC_ESC):
+			return true;
         default:
             // Do not select the hold action when another key is pressed.
             return false;
@@ -527,9 +529,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(2,KC_SPC):
-		case LCTL_T(KC_ESC):
-            // Immediately select the hold action when another key is tapped.
-            return true;
+			return true;
         default:
             // Do not select the hold action when another key is tapped.
             return false;
@@ -546,8 +546,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 		case LT(6,KC_A):
             return 200;
 		*/
-		case LCTL_T(KC_ESC):
-            return 150;
         default:
             return 170;
     }
@@ -556,12 +554,13 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 /* 
  * LT(2,KC_SPC) 한번 누른 후, 두번 째 hold 했을 경우
  * 연속키가 자동으로 입력된다. 그 간격을 조정하는 함수.
+ * 그 간격 값이 작을 경우, 빠른 입력이 repeat가 발생됨
  * 이 키는 hold보다 우선 한다.
  */
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(2,KC_SPC):
-            return 180;
+            return 110;
         default:
             return 180;
     }

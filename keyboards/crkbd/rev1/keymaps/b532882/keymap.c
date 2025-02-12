@@ -266,7 +266,7 @@ static bool process_tap_or_long_press_key(
 /////////////////////////////////////////////////////////////////////////////////
 //  shfit feature
 /////////////////////////////////////////////////////////////////////////////////
-#if 0
+#if 1
 uint16_t get_autoshift_timeout(uint16_t keycode, keyrecord_t *record) {
 	int timeout=0;
     switch(keycode) {
@@ -541,11 +541,9 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
  */
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-		/*
 		case LT(5,KC_F):
 		case LT(6,KC_A):
-            return 200;
-		*/
+            return 230;
         default:
             return 170;
     }

@@ -543,9 +543,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
 		case LT(5,KC_F):
 		case LT(6,KC_A):
-            return 250;
+            return 230;
         default:
-            return 160;
+            return 170;
     }
 }
 
@@ -558,7 +558,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(2,KC_SPC):
-            return 120;
+            return 110;
         default:
             return 180;
     }

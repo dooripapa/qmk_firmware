@@ -172,7 +172,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             break;
         case PASSWRD2:
             if (pressed) {
-                SEND_STRING("Rlqkstlqdldnjf12!");
+                SEND_STRING("Rlqksdldnjf02!");
             }
             break;
         case PASSWRD3:
@@ -543,9 +543,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
 		case LT(5,KC_F):
 		case LT(6,KC_A):
-            return 230;
+            return 250;
         default:
-            return 170;
+            return 160;
     }
 }
 
@@ -558,7 +558,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(2,KC_SPC):
-            return 110;
+            return 120;
         default:
             return 180;
     }

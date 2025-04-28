@@ -33,7 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define NO_AUTO_SHIFT_NUMERIC
 #define NO_AUTO_SHIFT_SPECIAL
 
-#define NO_ACTION_TAPPING
+//#define NO_ACTION_TAPPING
 
 //#define TAPPING_TERM_PER_KEY
 //#define RETRO_TAPPING_PER_KEY

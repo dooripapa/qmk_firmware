@@ -21,7 +21,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 KC_TAB          , KC_Q      , KC_W        , KC_E         , KC_R        , KC_T         , KC_Y         , KC_U        , KC_I          , KC_O         , KC_P    , KC_BSPC ,
 LCTL_T(KC_ESC)  , LT(5,KC_A), KC_S        , KC_D         , LT(4,KC_F)  , KC_G         , KC_H         , KC_J        , KC_K          , KC_L         , KC_SCLN , KC_ENT  ,
 KC_LSFT         , KC_Z      , KC_X        , KC_C         , KC_V        , KC_B         , KC_N         , KC_M        , KC_COMM       , KC_DOT       , KC_SLSH , KC_RSFT ,
-                  KC_ESC    , KC_LGUI     , KC_LALT      , MO(3)       , MO(1)        , LT(2,KC_SPC) , KC_RALT     , MO(3)         , KC_CAPS      , QK_BOOT
+                  KC_LCTL   , MO(3)       , KC_LGUI      , KC_LALT     , MO(1)        , LT(2,KC_SPC) , KC_RALT     , MO(3)         , KC_CAPS      , QK_BOOT
 ),
 [1] = LAYOUT_ortho_4x12_2x2u( //CW_TOGG
     _______  , KC_NO  , KC_NO  , C(S(KC_TAB)) , C(KC_TAB)     , KC_NO   , KC_HOME   , C(KC_PGUP)    , C(KC_PGDN)     , KC_NO   , KC_PGUP  , _______      ,
@@ -216,6 +216,106 @@ void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record)
 /////////////////////////////////////////////////////////////////////////////////
 #endif
 
+/////////////////////////////////////////////////////////////////////////////////
+//  key detail controls
+/////////////////////////////////////////////////////////////////////////////////
+/*
+ * #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY 
+ * 설정 되어 있어야 한다.
+ *                          TAPPING_TERM
+  +---------------------------|--------+
+  | +-------------+           |        |
+  | | LT(2, KC_A) |           |        |
+  | +-------------+           |        |
+  |   +------------------+    |        |
+  |   | KC_L(layer2, ->) |    |        |
+  |   +------------------+    |        |
+  +---------------------------|--------+
+  -> TERM안에 일반적으로 A, L 키가 입력됨.
+  -> get_hold_on_other_key_press 에 설정된 키는
+  -> TERM무시하고 즉시 A, -> 입력이 됨
+ */
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+		case LCTL_T(KC_ESC):
+			return true;
+        default:
+            // Do not select the hold action when another key is pressed.
+            return false;
+    }
+}
+/*
+ *                         TAPPING_TERM   
+  +---------------------------|--------+
+  | +----------------------+  |        |
+  | | LT(2, KC_A)          |  |        |
+  | +----------------------+  |        |
+  |   +------------------+    |        |
+  |   | KC_L(layer2, ->) |    |        |
+  |   +------------------+    |        |
+  +---------------------------|--------+
+  이럴 경우, 일반적으로 TERM이내 이므로, A,L 이나
+  permissive로 설정되어 있다면, A, -> 가 된다.
+ */
+
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT(2,KC_SPC):
+			return true;
+        default:
+            // Do not select the hold action when another key is tapped.
+            return false;
+    }
+}
+
+/*
+ * tap, hold 개별 설정을 함.
+ */
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+		case LT(5,KC_F):
+		case LT(6,KC_A):
+            return 230;
+        default:
+            return 170;
+    }
+}
+
+/* 
+ * LT(2,KC_SPC) 한번 누른 후, 두번 째 hold 했을 경우
+ * 연속키가 자동으로 입력된다. 그 간격을 조정하는 함수.
+ * 그 간격 값이 작을 경우, 빠른 입력이 repeat가 발생됨
+ * 이 키는 hold보다 우선 한다.
+ */
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT(2,KC_SPC):
+            return 110;
+        default:
+            return 180;
+    }
+}
+
+/* 
+ * LT(0,X) 키 형식을 retro로 지정하면 안된다
+ * 이 함수의 기능은, hold한 후 제2의 키를 입력하지 않는다면, 
+ * 해당키가 즉시 입력된다.
+ * LT(1,KC_SPC) 라고하면, KC_SPC키가 바로 입력된다.
+ */
+bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+		case LT(5,KC_F): 
+		case LT(6,KC_A): 
+        case LT(2,KC_SPC):
+		case LCTL_T(KC_ESC):
+            return true;
+        default:
+            return false;
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////
+//  key detail controls
+/////////////////////////////////////////////////////////////////////////////////
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 

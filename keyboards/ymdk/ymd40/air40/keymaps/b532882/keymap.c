@@ -273,8 +273,8 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
  */
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-		case LT(5,KC_F):
-		case LT(6,KC_A):
+		case LT(4,KC_F):
+		case LT(5,KC_A):
             return 230;
         default:
             return 170;
@@ -304,8 +304,8 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
  */
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-		case LT(5,KC_F): 
-		case LT(6,KC_A): 
+		case LT(4,KC_F): 
+		case LT(5,KC_A): 
         case LT(2,KC_SPC):
 		case LCTL_T(KC_ESC):
             return true;

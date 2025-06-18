@@ -33,16 +33,16 @@ KC_LSFT         , KC_Z      , KC_X        , KC_C         , KC_V        , KC_B   
     _______ , S(KC_1)   , S(KC_2)  , S(KC_3)   , S(KC_4)   , S(KC_5)    , S(KC_6)    , S(KC_7)    , S(KC_8)    , S(KC_9)  , S(KC_0)    , _______ ,
     _______ , KC_GRV    , S(KC_GRV), KC_LCBR   , KC_RCBR   , S(KC_BSLS) , KC_EQL     , KC_MINS    , S(KC_QUOT) , KC_QUOT  , S(KC_SCLN) , _______ ,
     _______ , KC_NO     , KC_NO    , KC_LBRC   , KC_RBRC   , KC_BSLS    , S(KC_EQL)  , S(KC_MINS) , S(KC_COMM) , S(KC_DOT), S(KC_SLSH) , _______ ,
-               _______, _______,  _______     , _______       , _______ , _______   , _______       , _______   , _______ , _______
+                 _______, _______  , _______   , _______   , _______    , _______    , _______    , _______    , _______  , _______
 ),
 [3] = LAYOUT_ortho_4x12_2x2u(
-                        //change signature //rename //run            //debug   //unit test for current cursor position.
-                        //stop                                                             //generate
-    _______ , KC_NO   , KC_NO   , C(KC_F6)         , S(KC_F6), C(S(KC_F10))  , S(KC_F9)  , C(S(KC_F10)), A(KC_INS), KC_NO   , KC_NO   , _______ ,
-    _______ , KC_NO   , C(KC_F2), KC_NO            , KC_NO   , KC_NO         , KC_NO     , KC_NO       , KC_NO    , KC_NO   , KC_NO   , _______ ,
-                                                               //debug spot    //inline    //extract function
-    _______ , KC_NO   , KC_NO   , KC_NO            , KC_NO   , C(KC_F8)      , C(A(KC_N)), C(A(KC_M))  , KC_NO    , KC_NO   , KC_NO   , _______ ,
-               _______, _______,  _______     , _______       , _______ , _______   , _______       , _______        , _______ , _______
+                        //change signature //rename       //run     //debug         //unit test for current cursor position.
+                        //stop                                                                  //generate
+    _______ , KC_NO   , KC_NO              , C(KC_F6)     , S(KC_F6), C(S(KC_F10))  , S(KC_F9)  , C(S(KC_F10)), A(KC_INS), KC_NO   , KC_NO   , _______ ,
+    _______ , KC_NO   , C(KC_F2)           , KC_NO        , KC_NO   , KC_NO         , KC_NO     , KC_NO       , KC_NO    , KC_NO   , KC_NO   , _______ ,
+                                                                    //debug spot    //inline    //extract function
+    _______ , KC_NO   , KC_NO              , KC_NO        , KC_NO   , C(KC_F8)      , C(A(KC_N)), C(A(KC_M))  , KC_NO    , KC_NO   , KC_NO   , _______ ,
+               _______, _______            ,  _______     , _______ , _______       , _______   , _______     , _______  , _______ , _______
 ),
 [4] = LAYOUT_ortho_4x12_2x2u(
     _______  , KC_NO    , KC_NO  , KC_NO    , KC_NO    , KC_NO     , KC_NO        , KC_7      , KC_8      , KC_9      , KC_0    , _______ ,
@@ -51,10 +51,10 @@ KC_LSFT         , KC_Z      , KC_X        , KC_C         , KC_V        , KC_B   
                _______  , _______,  _______ , _______  , MO(1)     , LT(2,KC_SPC) , _______   , _______   , _______   , _______
 ),
 [5] = LAYOUT_ortho_4x12_2x2u(
-    _______  , KC_NO    , KC_NO  , KC_NO    , KC_NO    , KC_NO     , KC_NO     , KC_F7        , KC_F8     , KC_F9      , KC_F10 , _______ ,
-    _______  , _______  , KC_NO  , KC_NO    , KC_NO    , KC_NO     , KC_NO     , KC_F4        , KC_F5     , KC_F6      , KC_F11 , _______ ,
-    _______  , KC_NO    , KC_NO  , KC_NO    , KC_NO    , KC_NO     , KC_NO     , KC_F1        , KC_F2     , KC_F3      , KC_F12 , _______ ,
-               _______  , _______,  _______ , _______  , MO(1)     , LT(2,KC_SPC) , _______   , _______   , _______   , _______
+    _______  , KC_NO    , KC_NO  , KC_NO    , KC_NO    , KC_NO     , KC_NO        , KC_F7        , KC_F8     , KC_F9      , KC_F10 , _______ ,
+    _______  , _______  , KC_NO  , KC_NO    , KC_NO    , KC_NO     , KC_NO        , KC_F4        , KC_F5     , KC_F6      , KC_F11 , _______ ,
+    _______  , KC_NO    , KC_NO  , KC_NO    , KC_NO    , KC_NO     , KC_NO        , KC_F1        , KC_F2     , KC_F3      , KC_F12 , _______ ,
+               _______  , _______,  _______ , _______  , MO(1)     , LT(2,KC_SPC) , _______      , _______   , _______    , _______
 )
 };
 
